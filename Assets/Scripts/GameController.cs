@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
 	[SerializeField] private GameObject player;
 	[SerializeField] private PlayerMovement playerMovement;
+	
 
 	[SerializeField] private float direction;
 	[SerializeField] private float directionLowerRange;
