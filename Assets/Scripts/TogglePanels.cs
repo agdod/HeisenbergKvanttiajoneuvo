@@ -10,7 +10,6 @@ public class TogglePanels : MonoBehaviour
 	[SerializeField] private GameObject velocityPanleMask;
 	[SerializeField] private GameObject dirrectionInputText;
 	[SerializeField] private GameObject dirrectionPanelMask;
-	[SerializeField] private Scaler thisScaler;
 
 	public void ActivateVelocityPanel()
 	{
