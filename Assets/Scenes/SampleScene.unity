@@ -574,9 +574,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b78e3f97b15a44a8fc0d1a60446fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityInputText: {fileID: 1019641964}
+  velocityInputText: {fileID: 1173476253}
   velocityPanleMask: {fileID: 774919949}
-  dirrectionInputText: {fileID: 904065490}
+  dirrectionInputText: {fileID: 83850622}
   dirrectionPanelMask: {fileID: 1363122632}
   thisScaler: 0
 --- !u!1 &436665251
@@ -1343,9 +1343,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b78e3f97b15a44a8fc0d1a60446fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityInputText: {fileID: 1019641964}
+  velocityInputText: {fileID: 1173476253}
   velocityPanleMask: {fileID: 774919949}
-  dirrectionInputText: {fileID: 904065490}
+  dirrectionInputText: {fileID: 83850622}
   dirrectionPanelMask: {fileID: 1363122632}
   thisScaler: 0
 --- !u!1 &748736106
