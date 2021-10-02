@@ -64,7 +64,6 @@ public class SpawnController : MonoBehaviour
 				posz = UnityEngine.Random.Range(zeroPosOffset, zLowerRange);
 				posVector = new Vector3(posx, yPos, posz);
 				break;
-
 		}
 
 		return posVector;

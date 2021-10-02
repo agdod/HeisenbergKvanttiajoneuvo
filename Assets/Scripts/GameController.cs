@@ -8,7 +8,8 @@ public class GameController : MonoBehaviour
 {
 	[SerializeField] private GameObject player;
 	[SerializeField] private PlayerMovement playerMovement;
-	
+	[SerializeField] private GameObject destination;
+
 
 	[SerializeField] private float direction;
 	[SerializeField] private float directionLowerRange;
@@ -21,7 +22,18 @@ public class GameController : MonoBehaviour
 	[SerializeField] private Text velocityText;
 	[SerializeField] private Text directionText;
 
+	[Header("Quantum Reealm diamensions")]
+	[SerializeField] private float xValue = 230.0f;
+	[SerializeField] private float zValue = 230.0f;
+	[SerializeField] private float yOffset;
+
+
 	[SerializeField] [Tooltip("Duration of turn")] private float timeFrame = 5.0f;
+
+	public GameObject Destination
+	{
+		get { return destination; }
+	}
 
 	public float TimeFrame
 	{
@@ -33,11 +45,27 @@ public class GameController : MonoBehaviour
 		playerMovement = player.GetComponent<PlayerMovement>();
 	}
 
+	private void Start()
+	{
+		if (destination != null)
+		{
+			PositionDestination();
+		}
+	}
+
 	public void CollectValues()
 	{
 		direction = CollectDirection();
 		velocity = CollectVelocity();
 		StartCoroutine(playerMovement.MovePlayer(velocity, direction));
+	}
+
+	private void PositionDestination()
+	{
+		float xpos = UnityEngine.Random.Range(-xValue, xValue);
+		float zpos = UnityEngine.Random.Range(-zValue, zValue);
+		Vector3 vectorPos = new Vector3(xpos, yOffset, zpos);
+		Instantiate(destination, vectorPos, Quaternion.identity);
 	}
 
 	private void GenerateRandomSeed()
