@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class MiniMap : MonoBehaviour
 {
-    [Header("Game Components")]
+	[Header("Game Components")]
 	[SerializeField] private GameController gameController;
-    [SerializeField] private GameObject player;
+	[SerializeField] private GameObject player;
 
 	[Header("Minimap Components")]
 	[SerializeField] private Image mmPlayer;
@@ -16,7 +16,7 @@ public class MiniMap : MonoBehaviour
 	private RectTransform rectPlayer;
 	private RectTransform rectDestination;
 
-	private float scaleFactor=2.5f;
+	[SerializeField] private float scaleFactor = 2.5f;
 
 	private void Awake()
 	{
@@ -31,12 +31,25 @@ public class MiniMap : MonoBehaviour
 		MiniMapSetup();
 	}
 
+	private void Update()
+	{
+		UpdatePlayerPosition();
+	}
+
+	private void UpdatePlayerPosition()
+	{
+		float xAxis = player.transform.position.x / scaleFactor;
+		float yAxis = player.transform.position.z / scaleFactor;
+		rectPlayer.anchoredPosition = new Vector2(xAxis, yAxis);
+	}
+
 	private void MiniMapSetup()
 	{
 		float xAxis = 0.0f;
 		float yAxis = 0.0f;
-		Debug.Log(mmPlayer.transform.position);
-		rectPlayer.position = new Vector2(xAxis,yAxis);
-
+		rectPlayer.anchoredPosition = new Vector2(xAxis, yAxis);
+		xAxis = gameController.Destination.x / scaleFactor;
+		yAxis = gameController.Destination.z / scaleFactor;
+		rectDestination.anchoredPosition = new Vector2(xAxis, yAxis);
 	}
 }
