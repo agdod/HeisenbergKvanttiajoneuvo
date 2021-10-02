@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 	private Vector3 playerDirection = new Vector3(0, 0, 0);
 	[SerializeField] private Vector3 playerStartPosition;
 	[SerializeField] private GameController gameController;
+	[SerializeField] float transition;
 
 	void Awake()
 	{
@@ -44,19 +45,19 @@ public class PlayerMovement : MonoBehaviour
 
 	private void ResetPosition()
 	{
-		Debug.Log("End of turn. Loose turn?");
 		StopAllCoroutines();
 		transform.position = playerStartPosition;
+		PlayerEndTurn();
 	}
 
 	public IEnumerator MovePlayer(float pVelocity, float pDirection)
 	{
 		// rotate the player direction
 		transform.Rotate(0, pDirection, 0);
-		float transition;
 		transition = 0f;
 
 		// move the player 
+		gameController.StartTurn();
 		while (transition < 1.0f)
 		{
 			if (!OutOfBounds())
@@ -73,10 +74,16 @@ public class PlayerMovement : MonoBehaviour
 
 			yield return new WaitForEndOfFrame();
 		}
-
+		PlayerEndTurn();
 		Debug.Log("TurnOver");
 	}
 
+	public void PlayerEndTurn()
+	{
+		transition = 1.0f;
+		gameController.EndTurn();
+
+	}
 	public void OnTriggerEnter(Collider other)
 	{
 		Debug.Log(this.name + " collided wiht " + other);

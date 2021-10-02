@@ -22,12 +22,16 @@ public class GameController : MonoBehaviour
 
 	[SerializeField] private Text velocityText;
 	[SerializeField] private Text directionText;
+	[SerializeField] private TMPro.TMP_Text remainTurnsText;
 
 	[Header("Quantum Reealm diamensions")]
 	[SerializeField] private float xValue = 230.0f;
 	[SerializeField] private float zValue = 230.0f;
 	[SerializeField] private float yOffset;
 
+	[SerializeField] private GameObject centerPanel;
+
+	[SerializeField] private int remainingTurns = 5;
 
 	[SerializeField] [Tooltip("Duration of turn")] private float timeFrame = 5.0f;
 
@@ -52,6 +56,20 @@ public class GameController : MonoBehaviour
 		{
 			PositionDestination();
 		}
+		remainTurnsText.text = remainingTurns.ToString();
+	}
+
+	public void StartTurn()
+	{
+		centerPanel.SetActive(true);
+	}
+
+	public void EndTurn()
+	{
+		centerPanel.SetActive(false);
+		remainingTurns--;
+		remainTurnsText.text = remainingTurns.ToString();
+
 	}
 
 	public void CollectValues()
