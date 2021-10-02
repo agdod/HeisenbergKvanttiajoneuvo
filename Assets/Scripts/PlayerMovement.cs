@@ -63,7 +63,6 @@ public class PlayerMovement : MonoBehaviour
 			{
 				transform.Translate(Vector3.forward * pVelocity * Time.deltaTime);
 				transition += Time.deltaTime * 1 / gameController.TimeFrame;
-				Debug.Log(transition);
 			}
 			else
 			{

@@ -3462,10 +3462,10 @@ MonoBehaviour:
   xUpperRange: 235
   zLowerRange: -235
   zUpperRange: 235
-  yPos: 2
+  yPos: 0.1
   zeroPosOffset: 1.5
   newParent: {fileID: 1709919577}
-  spawnablePrefab: {fileID: 919132149155446097, guid: 34d45b941fd3e504a960b7366ba57266, type: 3}
+  spawnablePrefab: {fileID: 3307423087277454343, guid: d9cf49ba9cd66d24d85eb8798f46cf59, type: 3}
   quantity: 5
 --- !u!4 &1709919579
 Transform:

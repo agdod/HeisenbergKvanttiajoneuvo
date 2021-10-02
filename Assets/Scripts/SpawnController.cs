@@ -28,7 +28,6 @@ public class SpawnController : MonoBehaviour
 	[SerializeField] private GameObject spawnablePrefab;
 	// Amount of obsticles per Quadrant.
 	[SerializeField] private int quantity;
-	private int quadrants = 4;
 
 	private void Start()
 	{

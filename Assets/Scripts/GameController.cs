@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
 	[SerializeField] private GameObject player;
 	[SerializeField] private PlayerMovement playerMovement;
 	[SerializeField] private GameObject destination;
+	[SerializeField] private Vector3 destinationPosition;
 
 
 	[SerializeField] private float direction;
@@ -30,9 +31,9 @@ public class GameController : MonoBehaviour
 
 	[SerializeField] [Tooltip("Duration of turn")] private float timeFrame = 5.0f;
 
-	public GameObject Destination
+	public Vector3 Destination
 	{
-		get { return destination; }
+		get { return destinationPosition; }
 	}
 
 	public float TimeFrame
@@ -64,8 +65,8 @@ public class GameController : MonoBehaviour
 	{
 		float xpos = UnityEngine.Random.Range(-xValue, xValue);
 		float zpos = UnityEngine.Random.Range(-zValue, zValue);
-		Vector3 vectorPos = new Vector3(xpos, yOffset, zpos);
-		Instantiate(destination, vectorPos, Quaternion.identity);
+		destinationPosition = new Vector3(xpos, yOffset, zpos);
+		Instantiate(destination, destinationPosition, Quaternion.identity);
 	}
 
 	private void GenerateRandomSeed()
