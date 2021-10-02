@@ -1,0 +1,165 @@
+fileFormatVersion: 2
+guid: 720c09c5e3f12054ab04d0d1d102b75f
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: 6942468197490418192
+    second: bicycle|Cycle_shake
+  - first:
+      74: -199613143102596119
+    second: bicycle|PedalsAction
+  - first:
+      74: 4114673907400313439
+    second: bicycle|Wheel front.001Action
+  - first:
+      74: 7494672077825943041
+    second: bicycle|Wheel frontAction
+  - first:
+      74: -635876797314805483
+    second: Armature|Cycle_shake
+  - first:
+      74: 6175286401639210713
+    second: Armature|Heisenberg_pedaling
+  - first:
+      74: 8439993141666549017
+    second: Armature|PedalsAction
+  - first:
+      74: -5337303659592020022
+    second: Armature|Wheel front.001Action
+  - first:
+      74: -900111375026793729
+    second: Armature|Wheel frontAction
+  - first:
+      74: -7774474286757878392
+    second: Wheel front.001|Cycle_shake
+  - first:
+      74: -5544592048467364950
+    second: Wheel front.001|PedalsAction
+  - first:
+      74: -3984882283200845142
+    second: Wheel front.001|Wheel front.001Action
+  - first:
+      74: -5733829908205772829
+    second: Wheel front.001|Wheel frontAction
+  - first:
+      74: -6368763212783998159
+    second: Wheel front|Cycle_shake
+  - first:
+      74: 8195270076459261618
+    second: Wheel front|PedalsAction
+  - first:
+      74: -5200792394581248855
+    second: Wheel front|Wheel front.001Action
+  - first:
+      74: -8282698768690277052
+    second: Wheel front|Wheel frontAction
+  - first:
+      74: 8938341636992676195
+    second: Pedals|Cycle_shake
+  - first:
+      74: 3472063691198067730
+    second: Pedals|PedalsAction
+  - first:
+      74: -690467837966701467
+    second: Pedals|Wheel front.001Action
+  - first:
+      74: -8704595086547529988
+    second: Pedals|Wheel frontAction
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
