@@ -10,7 +10,12 @@ public class GameController : MonoBehaviour
 	[SerializeField] private PlayerMovement playerMovement;
 
 	[SerializeField] private float direction;
+	[SerializeField] private float directionLowerRange;
+	[SerializeField] private float directionUpperRange;
+
 	[SerializeField] private float velocity;
+	[SerializeField] private float velocityLowerRange;
+	[SerializeField] private float velocityUpperRange;
 
 	[SerializeField] private Text velocityText;
 	[SerializeField] private Text directionText;
@@ -34,14 +39,20 @@ public class GameController : MonoBehaviour
 		StartCoroutine(playerMovement.MovePlayer(velocity, direction));
 	}
 
+	private void GenerateRandomSeed()
+	{
+		int initalSeed = (int)Time.deltaTime;
+		UnityEngine.Random.InitState(initalSeed);
+	}
+
 	private float CollectDirection()
 	{
+		float dir = 0.0f;
 		if (directionText.isActiveAndEnabled)
 		{
 			try
 			{
-				float dir = float.Parse(directionText.text);
-				return dir;
+				dir = float.Parse(directionText.text);
 			}
 			catch (FormatException e)
 			{
@@ -49,17 +60,23 @@ public class GameController : MonoBehaviour
 			}
 		}
 		// else random generate dirrection
-		return 0.0f;
+		else
+		{
+			Debug.Log("Generating random direction.");
+			GenerateRandomSeed();
+			dir = UnityEngine.Random.Range(directionLowerRange, directionUpperRange);
+		}
+		return dir;
 	}
 
 	private float CollectVelocity()
 	{
+		float vel = 0.0f;
 		if (velocityText.isActiveAndEnabled)
 		{
 			try
 			{
-				int vel = Int32.Parse(velocityText.text);
-				return vel;
+				vel = float.Parse(velocityText.text);
 			}
 			catch (FormatException e)
 			{
@@ -68,6 +85,12 @@ public class GameController : MonoBehaviour
 
 		}
 		// else random generate velocity
-		return 0.0f;
+		else
+		{
+			Debug.Log("generating random velocity.");
+			GenerateRandomSeed();
+			vel = UnityEngine.Random.Range(velocityLowerRange, velocityUpperRange);
+		}
+		return vel;
 	}
 }
