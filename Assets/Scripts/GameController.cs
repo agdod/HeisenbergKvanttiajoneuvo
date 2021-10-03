@@ -69,6 +69,10 @@ public class GameController : MonoBehaviour
 		centerPanel.SetActive(false);
 		remainingTurns--;
 		remainTurnsText.text = remainingTurns.ToString();
+		if (remainingTurns < 1)
+		{
+			Debug.Log("GameOver");
+		}
 
 	}
 

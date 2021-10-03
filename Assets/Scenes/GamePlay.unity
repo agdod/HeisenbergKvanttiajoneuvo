@@ -933,6 +933,7 @@ MonoBehaviour:
   playerStartPosition: {x: 0, y: 2.6, z: 0}
   gameController: {fileID: 1305153037}
   transition: 0
+  smooth: 5
 --- !u!54 &486950184
 Rigidbody:
   m_ObjectHideFlags: 0
