@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private Vector3 playerStartPosition;
 	[SerializeField] private GameController gameController;
 	[SerializeField] float transition;
+	[SerializeField] private float rotationDuration = 0.5f;
+	private float currentLerpTime = 0.0f;
 
 	void Awake()
 	{
@@ -50,14 +52,45 @@ public class PlayerMovement : MonoBehaviour
 		PlayerEndTurn();
 	}
 
-	public IEnumerator MovePlayer(float pVelocity, float pDirection)
+	// Rotate the player THEN
+	// Move the player.
+	public void RoateAndMovePlayer(float pVelocity, float pDirection)
+	{
+		gameController.StartTurn();
+		Quaternion targetRoatation = Quaternion.Euler(new Vector3(0, pDirection, 0));
+		StartCoroutine(RotatePlayer(targetRoatation, rotationDuration, pVelocity));
+	}
+
+	// Pass in the toRoation as user-friendly Euler Angle.
+	private IEnumerator RotatePlayer(Quaternion toRotation, float duration, float pVelocity)
+	{
+		float time = 0;
+		Quaternion fromRotation = transform.rotation;
+		while (time < duration)
+		{
+			transform.rotation = Quaternion.Lerp(fromRotation, toRotation, time / duration);
+			time += Time.deltaTime;
+			yield return null;
+		}
+		transform.rotation = toRotation;
+		// Once Coroutine for player rotation has finished move the player.
+		StartCoroutine(MovePlayer(pVelocity));
+	}
+
+	private IEnumerator MovePlayer(float pVelocity)
 	{
 		// rotate the player direction
-		transform.Rotate(0, pDirection, 0);
-		transition = 0f;
+		//transform.Rotate(0, pDirection, 0);
+		/*		
+		Quaternion targetRotation = Quaternion.identity;
+		targetRotation = Quaternion.LookRotation(new Vector3(0, pDirection, 0));
+		currentLerpTime += Time.deltaTime;
+		
+		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation,currentLerpTime/smooth );
+		*/
 
+		transition = 0f;
 		// move the player 
-		gameController.StartTurn();
 		while (transition < 1.0f)
 		{
 			if (!OutOfBounds())

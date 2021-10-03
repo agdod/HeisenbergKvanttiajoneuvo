@@ -80,7 +80,7 @@ public class GameController : MonoBehaviour
 	{
 		direction = CollectDirection();
 		velocity = CollectVelocity();
-		StartCoroutine(playerMovement.MovePlayer(velocity, direction));
+		playerMovement.RoateAndMovePlayer(velocity, direction);
 	}
 
 	private void PositionDestination()
