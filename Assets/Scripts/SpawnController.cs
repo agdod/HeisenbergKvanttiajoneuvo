@@ -28,6 +28,9 @@ public class SpawnController : MonoBehaviour
 	[SerializeField] private GameObject spawnablePrefab;
 	// Amount of obsticles per Quadrant.
 	[SerializeField] private int quantity;
+	// Reference to minimap
+	[SerializeField] private MiniMap miniMap;
+
 
 	private void Start()
 	{
@@ -64,7 +67,7 @@ public class SpawnController : MonoBehaviour
 				posVector = new Vector3(posx, yPos, posz);
 				break;
 		}
-
+		miniMap.AddTree(posVector);
 		return posVector;
 	}
 
