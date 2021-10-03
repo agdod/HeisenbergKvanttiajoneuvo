@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
 	[SerializeField] private GameObject destination;
 	[SerializeField] private Vector3 destinationPosition;
 	[SerializeField] private ArrowToPicnic arrowToPicnic;
+	[SerializeField] private GameObject flowerStand;
 
 
 	[SerializeField] private float direction;
@@ -101,6 +102,7 @@ public class GameController : MonoBehaviour
 	{
 		direction = CollectDirection();
 		velocity = CollectVelocity();
+		StartCoroutine(disableFlowerStand());
 		playerMovement.RoateAndMovePlayer(velocity, direction);
 	}
 
@@ -183,4 +185,11 @@ public class GameController : MonoBehaviour
 	{
 		SceneManager.LoadScene("GamePlay");
 	}
+
+	IEnumerator disableFlowerStand()
+	{
+		yield return new WaitForSeconds(1.5f);
+		flowerStand.SetActive(false);
+	}
+
 }
