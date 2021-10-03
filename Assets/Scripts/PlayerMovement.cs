@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
-{	
+{
 	[SerializeField] private Vector3 playerStartPosition;
 	[SerializeField] private GameController gameController;
 	[SerializeField] float transition;
@@ -89,4 +89,29 @@ public class PlayerMovement : MonoBehaviour
 		gameController.EndTurn();
 
 	}
+
+	// Smooth movement to center of picnic spread
+	private IEnumerator MoveToPicnic(float duration)
+	{
+		float time = 0;
+		while (time < duration)
+		{
+			transform.position = Vector3.MoveTowards(transform.position, gameController.Destination, time / duration);
+			time += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
+		transform.position = gameController.Destination;
+	}
+
+	public void PlayerArrived()
+	{
+		transition = 1.0f;
+		StopCoroutine(MovePlayer(0.0f));
+		transform.Translate(0, 0, 0);
+		// Move to center of picnic spread
+		StartCoroutine(MoveToPicnic(2.0f));
+		Debug.Log("GameEnd.");
+		gameController.GameOver("You arrived at the picnic.");
+	}
+
 }

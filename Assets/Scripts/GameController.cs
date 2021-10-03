@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameController : MonoBehaviour
 	[SerializeField] private PlayerMovement playerMovement;
 	[SerializeField] private GameObject destination;
 	[SerializeField] private Vector3 destinationPosition;
+	[SerializeField] private ArrowToPicnic arrowToPicnic;
 
 
 	[SerializeField] private float direction;
@@ -24,6 +26,11 @@ public class GameController : MonoBehaviour
 	[SerializeField] private Text directionText;
 	[SerializeField] private TMPro.TMP_Text remainTurnsText;
 
+	[Header("Game Over elements")]
+	[SerializeField] private TMPro.TMP_Text gameoverMessage;
+	[SerializeField] private GameObject gameoverCanvas;
+	[SerializeField] private GameObject gamePlayCanvas;
+
 	[Header("Quantum Reealm diamensions")]
 	[SerializeField] private float xValue = 230.0f;
 	[SerializeField] private float zValue = 230.0f;
@@ -34,6 +41,7 @@ public class GameController : MonoBehaviour
 	[SerializeField] private int remainingTurns = 5;
 
 	[SerializeField] [Tooltip("Duration of turn")] private float timeFrame = 5.0f;
+	[SerializeField] private bool gameEnd = false;
 
 	public Vector3 Destination
 	{
@@ -67,12 +75,25 @@ public class GameController : MonoBehaviour
 	public void EndTurn()
 	{
 		centerPanel.SetActive(false);
+		//arrowToPicnic.UpdateArrow();
 		remainingTurns--;
 		remainTurnsText.text = remainingTurns.ToString();
 		if (remainingTurns < 1)
 		{
 			Debug.Log("GameOver");
+			GameOver(" Out of turns. ");
 		}
+	}
+
+	public void GameOver(string message)
+	{
+		// Stop all movement.
+		// Disable all buttons. Enable GameOver Panel - diable over panel.
+		// Display message
+		// Option to quit try again.
+		gamePlayCanvas.SetActive(false);
+		gameoverCanvas.SetActive(true);
+		gameoverMessage.text = message;
 
 	}
 
@@ -118,6 +139,9 @@ public class GameController : MonoBehaviour
 			GenerateRandomSeed();
 			dir = UnityEngine.Random.Range(directionLowerRange, directionUpperRange);
 		}
+		dir = Mathf.Clamp(dir, 0, 360);
+		Debug.Log(dir);
+		directionText.text = dir.ToString();
 		return dir;
 	}
 
@@ -143,6 +167,20 @@ public class GameController : MonoBehaviour
 			GenerateRandomSeed();
 			vel = UnityEngine.Random.Range(velocityLowerRange, velocityUpperRange);
 		}
+		vel = Mathf.Clamp(vel, 0, 25.0f);
+		Debug.Log(vel);
+		velocityText.text = vel.ToString();
 		return vel;
+	}
+
+	public void Quit()
+	{
+		Debug.Log("Quit pressed.");
+		Application.Quit();
+	}
+
+	public void PlayAgain()
+	{
+		SceneManager.LoadScene("GamePlay");
 	}
 }
