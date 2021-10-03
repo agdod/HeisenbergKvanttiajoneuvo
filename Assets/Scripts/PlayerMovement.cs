@@ -3,33 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
-{
-
-	[SerializeField] private GameObject player;
-
-	// User input values
-	[SerializeField] private float velocity;
-	[SerializeField] private float direction;
-	private Vector3 playerDirection = new Vector3(0, 0, 0);
+{	
 	[SerializeField] private Vector3 playerStartPosition;
 	[SerializeField] private GameController gameController;
 	[SerializeField] float transition;
 	[SerializeField] private float rotationDuration = 0.5f;
-	private float currentLerpTime = 0.0f;
-
-	void Awake()
-	{
-
-	}
 
 	private void Start()
 	{
 		transform.position = playerStartPosition;
-	}
-
-	void Update()
-	{
-		//StartCoroutine(MovePlayer());
 	}
 
 	private bool OutOfBounds()
@@ -79,16 +61,6 @@ public class PlayerMovement : MonoBehaviour
 
 	private IEnumerator MovePlayer(float pVelocity)
 	{
-		// rotate the player direction
-		//transform.Rotate(0, pDirection, 0);
-		/*		
-		Quaternion targetRotation = Quaternion.identity;
-		targetRotation = Quaternion.LookRotation(new Vector3(0, pDirection, 0));
-		currentLerpTime += Time.deltaTime;
-		
-		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation,currentLerpTime/smooth );
-		*/
-
 		transition = 0f;
 		// move the player 
 		while (transition < 1.0f)
@@ -116,9 +88,5 @@ public class PlayerMovement : MonoBehaviour
 		transition = 1.0f;
 		gameController.EndTurn();
 
-	}
-	public void OnTriggerEnter(Collider other)
-	{
-		Debug.Log(this.name + " collided wiht " + other);
 	}
 }
