@@ -927,13 +927,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6dfdd27012b9cd41b31bf869ad2b56e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 486950178}
-  velocity: 0
-  direction: 0
   playerStartPosition: {x: 0, y: 2.6, z: 0}
   gameController: {fileID: 1305153037}
   transition: 0
-  smooth: 5
+  rotationDuration: 0.5
 --- !u!54 &486950184
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3017,6 +3014,8 @@ MonoBehaviour:
   player: {fileID: 486950178}
   mmPlayer: {fileID: 2058316361}
   mmDestination: {fileID: 436665253}
+  mmTree: {fileID: 1976998083}
+  miniMapPanel: {fileID: 1134061766}
   scaleFactor: 2.5
 --- !u!1 &1173476253
 GameObject:
@@ -3819,6 +3818,7 @@ MonoBehaviour:
   newParent: {fileID: 1709919577}
   spawnablePrefab: {fileID: 3307423087277454343, guid: d9cf49ba9cd66d24d85eb8798f46cf59, type: 3}
   quantity: 5
+  miniMap: {fileID: 1134061770}
 --- !u!4 &1709919579
 Transform:
   m_ObjectHideFlags: 0
@@ -3995,7 +3995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1976998082
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4013,7 +4013,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 25, y: 10}
-  m_SizeDelta: {x: 10, y: 10}
+  m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1976998083
 MonoBehaviour:
