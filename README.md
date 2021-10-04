@@ -20,3 +20,6 @@ https://en.wikipedia.org/wiki/Uncertainty_principle
   must find his way to the picnic spot. 
  
  So at each turn you select either direction or velocity and the other elemet is then chosen at random and you ahve to try and make your way to the picnic spread
+
+https://elleros.itch.io/heisenbergsbicycle
+
