@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+	[SerializeField] private EventHandler eventHandler;
+
 	[SerializeField] private Vector3 playerStartPosition;
 	[SerializeField] private GameController gameController;
 	[SerializeField] float transition;
@@ -105,13 +107,21 @@ public class PlayerMovement : MonoBehaviour
 
 	public void PlayerArrived()
 	{
+		// Call the eventHandle to riase the event.
+		eventHandler.OnGameOver();
 		transition = 1.0f;
 		StopCoroutine(MovePlayer(0.0f));
 		transform.Translate(0, 0, 0);
 		// Move to center of picnic spread
 		StartCoroutine(MoveToPicnic(2.0f));
-		Debug.Log("GameEnd.");
-		gameController.GameOver("You arrived at the picnic.");
+		Debug.Log("GameEnd. arrive at picnic");
+		eventHandler.OnGameOverReason("You arrived at the picnic.");
+	}
+
+	private void OnDisable()
+	{
+		// unreigster from events
+
 	}
 
 }

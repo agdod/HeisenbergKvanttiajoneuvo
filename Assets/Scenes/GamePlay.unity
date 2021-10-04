@@ -1229,10 +1229,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6dfdd27012b9cd41b31bf869ad2b56e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventHandler: {fileID: 669174835}
   playerStartPosition: {x: 0, y: 2.6, z: 0}
   gameController: {fileID: 1305153037}
   transition: 0
-  rotationDuration: 0.5
+  rotationDuration: 1.5
 --- !u!54 &486950184
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1247,7 +1248,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!1 &530542190
 GameObject:
@@ -1383,6 +1384,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530542190}
   m_CullTransparentMesh: 1
+--- !u!1 &669174834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 669174836}
+  - component: {fileID: 669174835}
+  m_Layer: 0
+  m_Name: EventHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &669174835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669174834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4fdd2e5757677443b3af74dda06a382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &669174836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669174834}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -116.81554, y: 84.590164, z: -16.045881}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -4216,11 +4260,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0ee1142029d5049a628a35d513c770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventHandler: {fileID: 669174835}
   player: {fileID: 486950178}
   playerMovement: {fileID: 0}
   destination: {fileID: 6699918647772722657, guid: dd98d7462caa6e743ad592971613e429, type: 3}
   destinationPosition: {x: 0, y: 0, z: 0}
-  arrowToPicnic: {fileID: 0}
   flowerStand: {fileID: 2057817247}
   direction: 0
   directionLowerRange: 0
@@ -4231,16 +4275,13 @@ MonoBehaviour:
   velocityText: {fileID: 1019641965}
   directionText: {fileID: 904065492}
   remainTurnsText: {fileID: 909552299}
-  gameoverMessage: {fileID: 1682368333}
-  gameoverCanvas: {fileID: 1227324048}
-  gamePlayCanvas: {fileID: 885824862}
   xValue: 230
   zValue: 230
   yOffset: 0.2
   centerPanel: {fileID: 1560022282}
   remainingTurns: 5
   timeFrame: 5
-  gameEnd: 0
+  gameOver: 0
 --- !u!4 &1305153038
 Transform:
   m_ObjectHideFlags: 0
@@ -5232,6 +5273,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1855041943}
   m_CullTransparentMesh: 1
+--- !u!1 &1946801127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1946801129}
+  - component: {fileID: 1946801128}
+  m_Layer: 0
+  m_Name: GameOverController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1946801128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946801127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3586da65a03ee624898832d0cc0f0014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventHandler: {fileID: 669174835}
+  gameoverMessage: {fileID: 1682368333}
+  gameoverCanvas: {fileID: 1227324048}
+  gamePlayCanvas: {fileID: 885824862}
+--- !u!4 &1946801129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946801127}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -116.81554, y: 84.590164, z: -16.045881}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1970393174
 GameObject:
   m_ObjectHideFlags: 0

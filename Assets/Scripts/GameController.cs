@@ -7,11 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+	[Header("Event Handler and other Controllers")]
+	[SerializeField] private EventHandler eventHandler;
+	[Space]
 	[SerializeField] private GameObject player;
 	[SerializeField] private PlayerMovement playerMovement;
 	[SerializeField] private GameObject destination;
 	[SerializeField] private Vector3 destinationPosition;
-	[SerializeField] private ArrowToPicnic arrowToPicnic;
 	[SerializeField] private GameObject flowerStand;
 
 
@@ -27,11 +29,6 @@ public class GameController : MonoBehaviour
 	[SerializeField] private Text directionText;
 	[SerializeField] private TMPro.TMP_Text remainTurnsText;
 
-	[Header("Game Over elements")]
-	[SerializeField] private TMPro.TMP_Text gameoverMessage;
-	[SerializeField] private GameObject gameoverCanvas;
-	[SerializeField] private GameObject gamePlayCanvas;
-
 	[Header("Quantum Reealm diamensions")]
 	[SerializeField] private float xValue = 230.0f;
 	[SerializeField] private float zValue = 230.0f;
@@ -42,7 +39,7 @@ public class GameController : MonoBehaviour
 	[SerializeField] private int remainingTurns = 5;
 
 	[SerializeField] [Tooltip("Duration of turn")] private float timeFrame = 5.0f;
-	[SerializeField] private bool gameEnd = false;
+	[SerializeField] private bool gameOver = false;
 
 	public Vector3 Destination
 	{
@@ -66,6 +63,7 @@ public class GameController : MonoBehaviour
 			PositionDestination();
 		}
 		remainTurnsText.text = remainingTurns.ToString();
+		EventHandler.onGameOver += OnGameOverAction;
 	}
 
 	public void StartTurn()
@@ -79,23 +77,12 @@ public class GameController : MonoBehaviour
 		//arrowToPicnic.UpdateArrow();
 		remainingTurns--;
 		remainTurnsText.text = remainingTurns.ToString();
-		if (remainingTurns < 1)
+		if (remainingTurns < 1 && !gameOver)
 		{
-			Debug.Log("GameOver");
-			GameOver(" Out of turns. ");
+			Debug.Log("GameOver out of turns");
+			//GameOver(" Out of turns. ");
+			eventHandler.OnGameOverReason("Out of turns.");
 		}
-	}
-
-	public void GameOver(string message)
-	{
-		// Stop all movement.
-		// Disable all buttons. Enable GameOver Panel - diable over panel.
-		// Display message
-		// Option to quit try again.
-		gamePlayCanvas.SetActive(false);
-		gameoverCanvas.SetActive(true);
-		gameoverMessage.text = message;
-
 	}
 
 	public void CollectValues()
@@ -160,7 +147,6 @@ public class GameController : MonoBehaviour
 			{
 				Debug.LogError(e.Message);
 			}
-
 		}
 		// else random generate velocity
 		else
@@ -192,4 +178,14 @@ public class GameController : MonoBehaviour
 		flowerStand.SetActive(false);
 	}
 
+	private void OnGameOverAction()
+	{
+		gameOver = true;
+	}
+
+	private void OnDisable()
+	{
+		// unregister from events
+		EventHandler.onGameOver += OnGameOverAction;
+	}
 }
