@@ -65,8 +65,7 @@ public class UncertainityPanel : MonoBehaviour
 		else
 		{
 			thisSlider.value = 0;
-			/*thisSlider.gameObject.SetActive(false);
-			thisValue.text = "###";*/
+			thisValue.text = "###";
 			// Generate random value
 			GenerateRandomValue();
 		}

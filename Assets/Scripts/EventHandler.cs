@@ -15,6 +15,7 @@ public class EventHandler : MonoBehaviour
 	public static event CollectUncertainityValues onCollectUncertainityValues;
 	public static event TurnAction onStartTurn;
 	public static event TurnAction onEndTurn;
+	public static event TurnAction outOfBounds;
 
 
 	public void OnGameOverReason(string message)
@@ -56,6 +57,15 @@ public class EventHandler : MonoBehaviour
 		if (onEndTurn != null)
 		{
 			onEndTurn.Invoke();
+		}
+	}
+
+	public void OnOutOfBounds()
+	{
+		if (outOfBounds != null)
+		{
+			outOfBounds.Invoke();
+			OnEndTurn();
 		}
 	}
 }

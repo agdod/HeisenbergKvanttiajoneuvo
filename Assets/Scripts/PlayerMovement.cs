@@ -14,18 +14,21 @@ public class PlayerMovement : MonoBehaviour
 	[Header("Uncertainity Values")]
 	[SerializeField] private floatVarible velocity;
 	[SerializeField] private floatVarible direction;
+	private bool endTurn;
 
 	private void Awake()
 	{
 		EventHandler.onStartTurn += RoateAndMovePlayer;
-
+		EventHandler.onEndTurn += EndTurn;
+		EventHandler.outOfBounds += ResetPosition;
 	}
 
 	private void OnDisable()
 	{
 		// unreigster from events
 		EventHandler.onStartTurn -= RoateAndMovePlayer;
-
+		EventHandler.onEndTurn -= EndTurn;
+		EventHandler.outOfBounds -= ResetPosition;
 	}
 
 	private void Start()
@@ -33,30 +36,22 @@ public class PlayerMovement : MonoBehaviour
 		transform.position = playerStartPosition;
 	}
 
-	private bool OutOfBounds()
+	private void EndTurn()
 	{
-		if (transform.position.x > -2405 && transform.position.x < 240 && transform.position.z > -240 && transform.position.z < 240)
-		{
-			return false;
-		}
-		else
-		{
-			Debug.Log("out of bounds");
-			return true;
-		}
+		endTurn = true;
 	}
 
 	private void ResetPosition()
 	{
 		StopAllCoroutines();
 		transform.position = playerStartPosition;
-		eventHandler.OnEndTurn();
 	}
 
 	// Rotate the player THEN
 	// Move the player.
 	public void RoateAndMovePlayer()
 	{
+		endTurn = false;
 		Quaternion targetRoatation = Quaternion.Euler(new Vector3(0, direction.value, 0));
 		StartCoroutine(RotatePlayer(targetRoatation, rotationDuration));
 	}
@@ -81,20 +76,10 @@ public class PlayerMovement : MonoBehaviour
 	{
 		transition = 0f;
 		// move the player 
-		while (transition < 1.0f)
+		while (transition < 1.0f && !endTurn)
 		{
-			if (!OutOfBounds())
-			{
-				transform.Translate(Vector3.forward * velocity.value * Time.deltaTime);
-				transition += Time.deltaTime * 1 / gameController.TimeFrame;
-			}
-			else
-			{
-				transition = 1.0f;
-				transform.Translate(0, 0, 0);
-				ResetPosition();
-			}
-
+			transform.Translate(Vector3.forward * velocity.value * Time.deltaTime);
+			transition += Time.deltaTime * 1 / gameController.TimeFrame;
 			yield return new WaitForEndOfFrame();
 		}
 		transition = 1.0f;
