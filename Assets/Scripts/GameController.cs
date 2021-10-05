@@ -64,6 +64,7 @@ public class GameController : MonoBehaviour
 		}
 		remainTurnsText.text = remainingTurns.ToString();
 		EventHandler.onGameOver += OnGameOverAction;
+		GenerateRandomSeed();
 	}
 
 	public void StartTurn()
@@ -87,14 +88,15 @@ public class GameController : MonoBehaviour
 
 	public void CollectValues()
 	{
-		direction = CollectDirection();
-		velocity = CollectVelocity();
+		// Call to invoke event for collecting the uncertainity values.
+		eventHandler.OnCollectUncertainityValues();
 		StartCoroutine(disableFlowerStand());
 		playerMovement.RoateAndMovePlayer(velocity, direction);
 	}
 
 	private void PositionDestination()
 	{
+		GenerateRandomSeed();
 		float xpos = UnityEngine.Random.Range(-xValue, xValue);
 		float zpos = UnityEngine.Random.Range(-zValue, zValue);
 		destinationPosition = new Vector3(xpos, yOffset, zpos);
@@ -103,7 +105,8 @@ public class GameController : MonoBehaviour
 
 	private void GenerateRandomSeed()
 	{
-		int initalSeed = (int)Time.deltaTime;
+		// Cast int64 DateTimeNow.Ticks to a int32 
+		int initalSeed = (int)DateTime.Now.Ticks;
 		UnityEngine.Random.InitState(initalSeed);
 	}
 
