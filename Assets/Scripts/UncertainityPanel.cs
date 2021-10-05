@@ -23,6 +23,13 @@ public class UncertainityPanel : MonoBehaviour
 		EventHandler.onEndTurn += EnableAndReset;
 	}
 
+	private void OnDisable()
+	{
+		EventHandler.onCollectUncertainityValues -= GenerateThisValue;
+		EventHandler.onStartTurn -= DisableAll;
+		EventHandler.onEndTurn -= EnableAndReset;
+	}
+
 	private void Start()
 	{
 		ActivateSlider();

@@ -10,6 +10,23 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private GameController gameController;
 	[SerializeField] float transition;
 	[SerializeField] private float rotationDuration = 0.5f;
+	[Space]
+	[Header("Uncertainity Values")]
+	[SerializeField] private floatVarible velocity;
+	[SerializeField] private floatVarible direction;
+
+	private void Awake()
+	{
+		EventHandler.onStartTurn += RoateAndMovePlayer;
+
+	}
+
+	private void OnDisable()
+	{
+		// unreigster from events
+		EventHandler.onStartTurn -= RoateAndMovePlayer;
+
+	}
 
 	private void Start()
 	{
@@ -33,20 +50,19 @@ public class PlayerMovement : MonoBehaviour
 	{
 		StopAllCoroutines();
 		transform.position = playerStartPosition;
-		PlayerEndTurn();
+		eventHandler.OnEndTurn();
 	}
 
 	// Rotate the player THEN
 	// Move the player.
-	public void RoateAndMovePlayer(float pVelocity, float pDirection)
+	public void RoateAndMovePlayer()
 	{
-		gameController.StartTurn();
-		Quaternion targetRoatation = Quaternion.Euler(new Vector3(0, pDirection, 0));
-		StartCoroutine(RotatePlayer(targetRoatation, rotationDuration, pVelocity));
+		Quaternion targetRoatation = Quaternion.Euler(new Vector3(0, direction.value, 0));
+		StartCoroutine(RotatePlayer(targetRoatation, rotationDuration));
 	}
 
 	// Pass in the toRoation as user-friendly Euler Angle.
-	private IEnumerator RotatePlayer(Quaternion toRotation, float duration, float pVelocity)
+	private IEnumerator RotatePlayer(Quaternion toRotation, float duration)
 	{
 		float time = 0;
 		Quaternion fromRotation = transform.rotation;
@@ -58,10 +74,10 @@ public class PlayerMovement : MonoBehaviour
 		}
 		transform.rotation = toRotation;
 		// Once Coroutine for player rotation has finished move the player.
-		StartCoroutine(MovePlayer(pVelocity));
+		StartCoroutine(MovePlayer());
 	}
 
-	private IEnumerator MovePlayer(float pVelocity)
+	private IEnumerator MovePlayer()
 	{
 		transition = 0f;
 		// move the player 
@@ -69,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
 		{
 			if (!OutOfBounds())
 			{
-				transform.Translate(Vector3.forward * pVelocity * Time.deltaTime);
+				transform.Translate(Vector3.forward * velocity.value * Time.deltaTime);
 				transition += Time.deltaTime * 1 / gameController.TimeFrame;
 			}
 			else
@@ -81,15 +97,9 @@ public class PlayerMovement : MonoBehaviour
 
 			yield return new WaitForEndOfFrame();
 		}
-		PlayerEndTurn();
-		Debug.Log("TurnOver");
-	}
-
-	public void PlayerEndTurn()
-	{
 		transition = 1.0f;
-		gameController.EndTurn();
-
+		eventHandler.OnEndTurn();
+		Debug.Log("TurnOver");
 	}
 
 	// Smooth movement to center of picnic spread
@@ -110,18 +120,12 @@ public class PlayerMovement : MonoBehaviour
 		// Call the eventHandle to riase the event.
 		eventHandler.OnGameOver();
 		transition = 1.0f;
-		StopCoroutine(MovePlayer(0.0f));
+		StopCoroutine(MovePlayer());
 		transform.Translate(0, 0, 0);
 		// Move to center of picnic spread
 		StartCoroutine(MoveToPicnic(2.0f));
 		Debug.Log("GameEnd. arrive at picnic");
 		eventHandler.OnGameOverReason("You arrived at the picnic.");
-	}
-
-	private void OnDisable()
-	{
-		// unreigster from events
-
 	}
 
 }

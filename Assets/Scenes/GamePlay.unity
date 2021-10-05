@@ -1252,6 +1252,8 @@ MonoBehaviour:
   gameController: {fileID: 1305153037}
   transition: 0
   rotationDuration: 1.5
+  velocity: {fileID: 0}
+  direction: {fileID: 0}
 --- !u!54 &486950184
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1770,6 +1772,7 @@ GameObject:
   - component: {fileID: 718087467}
   - component: {fileID: 718087466}
   - component: {fileID: 718087465}
+  - component: {fileID: 718087468}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1841,9 +1844,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 361f3b10455351d48b7e6123f2fb0528, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
+      - m_Target: {fileID: 718087468}
+        m_TargetAssemblyTypeName: GoButton, Assembly-CSharp
+        m_MethodName: OnClickGo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1903,6 +1906,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718087463}
   m_CullTransparentMesh: 1
+--- !u!114 &718087468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718087463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4949c7c91d2c853479001cdbdca2a4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventHandler: {fileID: 0}
+  goButton: {fileID: 0}
 --- !u!1 &728668145
 GameObject:
   m_ObjectHideFlags: 0
@@ -4462,24 +4479,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventHandler: {fileID: 669174835}
-  player: {fileID: 486950178}
-  playerMovement: {fileID: 0}
   destination: {fileID: 6699918647772722657, guid: dd98d7462caa6e743ad592971613e429, type: 3}
   destinationPosition: {x: 0, y: 0, z: 0}
   flowerStand: {fileID: 0}
-  direction: 0
-  directionLowerRange: 0
-  directionUpperRange: 360
-  velocity: 0
-  velocityLowerRange: 0
-  velocityUpperRange: 100
-  velocityText: {fileID: 0}
-  directionText: {fileID: 0}
   remainTurnsText: {fileID: 909552299}
   xValue: 230
   zValue: 230
   yOffset: 0.2
-  centerPanel: {fileID: 0}
   remainingTurns: 5
   timeFrame: 5
   gameOver: 0
