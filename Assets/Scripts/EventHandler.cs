@@ -16,6 +16,7 @@ public class EventHandler : MonoBehaviour
 	public static event TurnAction onStartTurn;
 	public static event TurnAction onEndTurn;
 	public static event TurnAction outOfBounds;
+	public static event TurnAction inMotion;
 
 
 	public void OnGameOverReason(string message)
@@ -66,6 +67,14 @@ public class EventHandler : MonoBehaviour
 		{
 			outOfBounds.Invoke();
 			OnEndTurn();
+		}
+	}
+
+	public void InMotion()
+	{
+		if (inMotion != null)
+		{
+			inMotion.Invoke();
 		}
 	}
 }

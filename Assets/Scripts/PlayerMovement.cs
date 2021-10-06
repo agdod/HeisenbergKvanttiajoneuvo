@@ -80,6 +80,12 @@ public class PlayerMovement : MonoBehaviour
 
 	private IEnumerator MovePlayer()
 	{
+		// Only start the movment animation if velcoity is greater than 0
+		if (velocity.value > 0)
+		{
+			eventHandler.InMotion();
+		}
+
 		transition = 0f;
 		// move the player 
 		while (transition < 1.0f && !endTurn)
