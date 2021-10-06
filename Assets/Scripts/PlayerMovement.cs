@@ -17,6 +17,11 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private FloatVariable direction;
 	private bool endTurn;
 
+	public EventHandler EventHandler
+	{
+		get { return eventHandler; }
+	}
+
 	private void Awake()
 	{
 		EventHandler.onStartTurn += RoateAndMovePlayer;
