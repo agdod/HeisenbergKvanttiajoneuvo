@@ -14,7 +14,7 @@ public class UncertainityPanel : MonoBehaviour
 	[SerializeField] private Toggle thisToggle;
 	[SerializeField] private Slider thisSlider;
 	[SerializeField] private TMPro.TMP_Text thisValue;
-	[SerializeField] private floatVarible uncertaintyVariable;
+	[SerializeField] private FloatVariable uncertaintyVariable;
 
 	private void Awake()
 	{

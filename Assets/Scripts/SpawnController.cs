@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SpawnController : MonoBehaviour
 {
@@ -14,7 +15,12 @@ public class SpawnController : MonoBehaviour
 	// Q2 = (0, xUpperRange)(0,ZUpperRange)
 	// Q3 = (0, xLowerRange)(0,zLowerRange)
 	// Q4 = (0, xUpperRange)(0,zLowerRange)
-
+	[Header("Quantum Reealm diamensions")]
+	[SerializeField] private float xValue = 230.0f;
+	[SerializeField] private float zValue = 230.0f;
+	[SerializeField] private float yOffset;
+	[Header("Quadrants")]
+	[Space]
 	[SerializeField] private float xLowerRange;
 	[SerializeField] private float xUpperRange;
 	[SerializeField] private float zLowerRange;
@@ -22,18 +28,23 @@ public class SpawnController : MonoBehaviour
 	[SerializeField] private float yPos;
 	[SerializeField] private float zeroPosOffset = 1.5f;
 
-	[SerializeField] private GameObject newParent;
-
-	// Prefer and qauntity 
+	[Header("Prefabs to Instantiate")]
+	[SerializeField] private GameObject destinationPrefab;
+	[SerializeField] private Vector3Variable destinationPosition;
+	[Header("Obsticales")]
+	// Prefrab and qauntity 
 	[SerializeField] private GameObject spawnablePrefab;
 	// Amount of obsticles per Quadrant.
 	[SerializeField] private int quantity;
+	[SerializeField] private GameObject newParent;
 	// Reference to minimap
 	[SerializeField] private MiniMap miniMap;
 
 
 	private void Start()
 	{
+		GenerateRandomSeed();
+		SpawnDestination();
 		SpawnObjects();
 	}
 
@@ -81,6 +92,22 @@ public class SpawnController : MonoBehaviour
 				go.transform.parent = newParent.transform;
 			}
 		}
+	}
+
+	private void SpawnDestination()
+	{
+		float xpos = UnityEngine.Random.Range(-xValue, xValue);
+		float zpos = UnityEngine.Random.Range(-zValue, zValue);
+		destinationPosition.value = new Vector3(xpos, yOffset, zpos);
+		miniMap.AddDestination(destinationPosition.value);
+		Instantiate(destinationPrefab, destinationPosition.value, Quaternion.identity);
+	}
+
+	private void GenerateRandomSeed()
+	{
+		// Cast int64 DateTimeNow.Ticks to a int32 
+		int initalSeed = (int)DateTime.Now.Ticks;
+		UnityEngine.Random.InitState(initalSeed);
 	}
 
 }

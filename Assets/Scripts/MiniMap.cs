@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class MiniMap : MonoBehaviour
 {
 	[Header("Game Components")]
-	[SerializeField] private GameController gameController;
 	[SerializeField] private GameObject player;
-
+	[Space]
 	[Header("Minimap Components")]
 	[SerializeField] private Image mmPlayer;
 	[SerializeField] private Image mmDestination;
@@ -26,11 +25,9 @@ public class MiniMap : MonoBehaviour
 		rectDestination = mmDestination.GetComponent<RectTransform>();
 	}
 
-	IEnumerator Start()
+	private void Start()
 	{
-		// Slight delay to make sure everything is load before fitting it to minimap
-		yield return new WaitForSeconds(0.1f);
-		MiniMapSetup();
+		PlayerSetup();
 	}
 
 	private void Update()
@@ -45,13 +42,17 @@ public class MiniMap : MonoBehaviour
 		rectPlayer.anchoredPosition = new Vector2(xAxis, yAxis);
 	}
 
-	private void MiniMapSetup()
+	private void PlayerSetup()
 	{
 		float xAxis = 0.0f;
 		float yAxis = 0.0f;
 		rectPlayer.anchoredPosition = new Vector2(xAxis, yAxis);
-		xAxis = gameController.Destination.x / scaleFactor;
-		yAxis = gameController.Destination.z / scaleFactor;
+	}
+
+	public void AddDestination(Vector3 destination)
+	{
+		float xAxis = destination.x / scaleFactor;
+		float yAxis = destination.z / scaleFactor;
 		rectDestination.anchoredPosition = new Vector2(xAxis, yAxis);
 	}
 

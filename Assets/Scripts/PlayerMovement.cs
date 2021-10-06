@@ -7,13 +7,14 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private EventHandler eventHandler;
 
 	[SerializeField] private Vector3 playerStartPosition;
-	[SerializeField] private GameController gameController;
+	[SerializeField] private Vector3Variable destination;
 	[SerializeField] float transition;
 	[SerializeField] private float rotationDuration = 0.5f;
+	[SerializeField] [Tooltip("Duration of turn")] private float timeFrame = 5.0f;
 	[Space]
 	[Header("Uncertainity Values")]
-	[SerializeField] private floatVarible velocity;
-	[SerializeField] private floatVarible direction;
+	[SerializeField] private FloatVariable velocity;
+	[SerializeField] private FloatVariable direction;
 	private bool endTurn;
 
 	private void Awake()
@@ -79,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 		while (transition < 1.0f && !endTurn)
 		{
 			transform.Translate(Vector3.forward * velocity.value * Time.deltaTime);
-			transition += Time.deltaTime * 1 / gameController.TimeFrame;
+			transition += Time.deltaTime * 1 / timeFrame;
 			yield return new WaitForEndOfFrame();
 		}
 		transition = 1.0f;
@@ -93,11 +94,11 @@ public class PlayerMovement : MonoBehaviour
 		float time = 0;
 		while (time < duration)
 		{
-			transform.position = Vector3.MoveTowards(transform.position, gameController.Destination, time / duration);
+			transform.position = Vector3.MoveTowards(transform.position, destination.value, time / duration);
 			time += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
-		transform.position = gameController.Destination;
+		transform.position = destination.value;
 	}
 
 	public void PlayerArrived()
