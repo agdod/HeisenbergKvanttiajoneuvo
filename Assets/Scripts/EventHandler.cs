@@ -6,6 +6,7 @@ public class EventHandler : MonoBehaviour
 {
 	public delegate void GameOverReason(string message);
 	public delegate void GameOverAction();
+	public delegate void StatusUpdate(string message);
 
 	public delegate void CollectUncertainityValues();
 	public delegate void TurnAction();
@@ -18,6 +19,7 @@ public class EventHandler : MonoBehaviour
 	public static event TurnAction outOfBounds;
 	public static event TurnAction inMotion;
 
+	public static event StatusUpdate onStatusUpdate;
 
 	public void OnGameOverReason(string message)
 	{
@@ -75,6 +77,16 @@ public class EventHandler : MonoBehaviour
 		if (inMotion != null)
 		{
 			inMotion.Invoke();
+		}
+	}
+
+	public void OnStatusUpdate(string message)
+	{
+		Debug.Log("Entering OnStatusUpdate....");
+		if (onStatusUpdate != null)
+		{
+			Debug.Log("status upadate invoked.");
+			onStatusUpdate.Invoke(message);
 		}
 	}
 }

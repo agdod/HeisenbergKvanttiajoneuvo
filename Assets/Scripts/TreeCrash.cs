@@ -11,7 +11,9 @@ public class TreeCrash : MonoBehaviour
 			// Raise a crash event and play crash animation -- TODO
 			PlayerMovement player = other.GetComponent<PlayerMovement>();
 			Debug.Log("Crashed wiht a tree!");
+			player.EventHandler.OnStatusUpdate("you hit a tree.");
 			player.EventHandler.OnEndTurn();
+
 		}
 	}
 }

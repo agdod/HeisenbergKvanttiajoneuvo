@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 	[Header("Uncertainity Values")]
 	[SerializeField] private FloatVariable velocity;
 	[SerializeField] private FloatVariable direction;
+	[SerializeField] private BoolVariable easyMode;
 	private bool endTurn;
 
 	public EventHandler EventHandler
@@ -40,6 +41,20 @@ public class PlayerMovement : MonoBehaviour
 	private void Start()
 	{
 		transform.position = playerStartPosition;
+		GenerateRelativeTo();
+	}
+
+	private void GenerateRelativeTo()
+	{
+		int mode = (int)UnityEngine.Random.Range(0, 13.0f);
+		if (mode % 2 == 0)
+		{
+			easyMode.value = true;
+		}
+		else
+		{
+			easyMode.value = false;
+		}
 	}
 
 	private void EndTurn()
@@ -58,11 +73,21 @@ public class PlayerMovement : MonoBehaviour
 	public void RoateAndMovePlayer()
 	{
 		endTurn = false;
+		Vector3 combinedRotation = new Vector3(0, 0, 0);
 		// Target roation is current world space roation PLUS direction roataion.
-		Vector3 combinedRoation = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y + direction.value, transform.localEulerAngles.z);
-		Quaternion targetRoatation = Quaternion.Euler(combinedRoation);
+		if (easyMode.value)
+		{
+			// If easy mode rotation is relative to player
+			combinedRotation = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y + direction.value, transform.localEulerAngles.z);
+		}
+		else
+		{
+			// If hard mode rotation is relative to World
+			combinedRotation = new Vector3(0, direction.value, 0);
+		}
+
+		Quaternion targetRoatation = Quaternion.Euler(combinedRotation);
 		StartCoroutine(RotatePlayer(targetRoatation, rotationDuration));
-		Debug.Log(combinedRoation);
 	}
 
 	// Pass in the toRoation as user-friendly Euler Angle.

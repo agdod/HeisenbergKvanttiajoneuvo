@@ -30,6 +30,8 @@ public class OutOfBounds : MonoBehaviour
 		if (other.tag == "Player" && !hasTriggered)
 		{
 			hasTriggered = true;
+			Debug.Log("out of bounds triggered");
+			eventHandler.OnStatusUpdate("you fell out of the Quantum Park.");
 			eventHandler.OnOutOfBounds();
 		}
 	}
