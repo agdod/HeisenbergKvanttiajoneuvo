@@ -43,7 +43,6 @@ public class FlowerStand : MonoBehaviour
 	{
 		float time = 0;
 		float fadeFrom = 1;
-		Debug.Log("alpha value : " + fadeFrom);
 		float alpha;
 		while (time < duration)
 		{
