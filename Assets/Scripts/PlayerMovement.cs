@@ -58,8 +58,11 @@ public class PlayerMovement : MonoBehaviour
 	public void RoateAndMovePlayer()
 	{
 		endTurn = false;
-		Quaternion targetRoatation = Quaternion.Euler(new Vector3(0, direction.value, 0));
+		// Target roation is current world space roation PLUS direction roataion.
+		Vector3 combinedRoation = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y + direction.value, transform.localEulerAngles.z);
+		Quaternion targetRoatation = Quaternion.Euler(combinedRoation);
 		StartCoroutine(RotatePlayer(targetRoatation, rotationDuration));
+		Debug.Log(combinedRoation);
 	}
 
 	// Pass in the toRoation as user-friendly Euler Angle.
